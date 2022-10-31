@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="songAdapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <variable
+            name="albumAdapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <variable
+            name="vm"
+            type="com.yt.yunxiaoweimusic.ui.page.SingerDetailFragment.MainStates" />
+
+        <variable
+            name="click"
+            type="com.yt.yunxiaoweimusic.ui.page.SingerDetailFragment.ClickProxy" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="600px">
+
+                <ImageView
+                    android:id="@+id/songListPic"
+                    url="@{vm.singerPic}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/bg_home" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="32px"
+                    android:text="@{vm.songListName}"
+                    android:textSize="48px" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="70px"
+                android:layout_marginLeft="32px"
+                android:layout_marginTop="35px"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <Button
+                    android:id="@+id/btnSong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.switchViewPager(0)}"
+                    android:text="@{`歌曲`+vm.songNum}"
+                    android:textColor="@color/orange" />
+
+                <Button
+                    android:id="@+id/btnAlbum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.switchViewPager(1)}"
+                    android:text="@{`专辑`+vm.albumNum}" />
+
+            </LinearLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+
+                <me.jingbin.library.ByRecyclerView
+                    android:id="@+id/songRv"
+                    adapter="@{songAdapter}"
+                    submitList="@{vm.songResult}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="com.kunminx.binding_recyclerview.layout_manager.WrapContentLinearLayoutManager"
+                    tools:listitem="@layout/adapter_search_song_item" />
+
+                <me.jingbin.library.ByRecyclerView
+                    android:id="@+id/albumRv"
+                    adapter="@{albumAdapter}"
+                    submitList="@{vm.albumResult}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="com.kunminx.binding_recyclerview.layout_manager.WrapContentLinearLayoutManager"
+                    tools:listitem="@layout/adapter_search_song_item" />
+            </androidx.viewpager.widget.ViewPager>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--歌手地区-->
+    <integer-array name="singer_area">
+        <item>-100</item>
+        <item>200</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
+
+    <!--歌手类型-->
+    <integer-array name="singer_type">
+        <item>-100</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+
+    <!--歌手流派-->
+    <integer-array name="singer_genre">
+        <item>-100</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>14</item>
+        <item>19</item>
+        <item>20</item>
+        <item>25</item>
+    </integer-array>
+
+    <declare-styleable name="PlayPauseView">
+        <attr name="isCircleDraw" format="boolean" />
+        <attr name="circleAlpha" format="integer" />
+        <attr name="backgroundColor" format="reference|color" />
+        <attr name="drawableColor" format="reference|color" />
+    </declare-styleable>
+
+</resources>

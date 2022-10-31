@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="click"
+            type="com.yt.yunxiaoweimusic.ui.page.SearchFragment.ClickProxy" />
+
+        <variable
+            name="songAdapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <variable
+            name="songListAdapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <variable
+            name="tabSelectedListener"
+            type="com.google.android.material.tabs.TabLayout.OnTabSelectedListener" />
+
+        <variable
+            name="vm"
+            type="com.yt.yunxiaoweimusic.ui.page.SearchFragment.MainStates" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppBarTheme"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="64px"
+                android:layout_marginStart="12px"
+                android:layout_marginEnd="12px"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                tools:ignore="MissingConstraints">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_name"
+                    android:layout_width="536px"
+                    android:layout_height="64px"
+                    android:background="@drawable/bg_ellipse_frame"
+                    android:inputType="text"
+                    android:paddingStart="32px"
+                    android:singleLine="true"
+                    android:text="@={vm.searchKeyWord}"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff"
+                    android:textSize="24px"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="24px"
+                    android:layout_height="24px"
+                    android:layout_marginEnd="32px"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{()->click.searchClick()}"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_home_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="@+id/et_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                initTabAndPage="@{vm.initTabAndPage}"
+                tabSelectedListener="@{tabSelectedListener}"
+                android:layout_width="wrap_content"
+                android:layout_height="36px"
+                android:layout_marginLeft="32px"
+                android:layout_marginTop="35px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorHeight="4px"
+                app:tabSelectedTextColor="@color/orange"
+                app:tabTextColor="@color/light_gray">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单曲" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="歌单" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="专辑" />
+            </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/songRv"
+                adapter="@{songAdapter}"
+                submitList="@{vm.songResult}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                app:layoutManager="com.kunminx.binding_recyclerview.layout_manager.WrapContentLinearLayoutManager"
+                tools:listitem="@layout/adapter_search_song_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/songListRv"
+                adapter="@{songListAdapter}"
+                submitList="@{vm.songListResult}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                app:layoutManager="com.kunminx.binding_recyclerview.layout_manager.WrapContentLinearLayoutManager"
+                tools:listitem="@layout/adapter_search_songlist_item" />
+        </androidx.viewpager.widget.ViewPager>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

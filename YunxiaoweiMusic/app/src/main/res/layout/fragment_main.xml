@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="click"
+            type="com.yt.yunxiaoweimusic.ui.page.MainFragment.ClickProxy" />
+
+        <variable
+            name="vm"
+            type="com.yt.yunxiaoweimusic.ui.page.MainFragment.MainStates" />
+
+        <variable
+            name="tabSelectedListener"
+            type="com.google.android.material.tabs.TabLayout.OnTabSelectedListener" />
+
+        <variable
+            name="singerListAdapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <variable
+            name="topListAdapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <variable
+            name="hotSongAdapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <variable
+            name="songListCategoryAdapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="64px"
+                android:layout_marginStart="12px"
+                android:layout_marginEnd="12px"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                tools:ignore="MissingConstraints">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_name"
+                    android:layout_width="376px"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24px"
+                    android:layout_marginEnd="24px"
+                    android:background="@drawable/bg_ellipse_frame"
+                    android:hint="输入歌曲或歌手名"
+                    android:inputType="text"
+                    android:paddingStart="12px"
+                    android:singleLine="true"
+                    android:text="@={vm.searchKeyWord}"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff"
+                    android:textSize="24px"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="24px"
+                    android:layout_height="24px"
+                    android:layout_marginEnd="20px"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{()->click.search()}"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_home_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="@+id/et_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_user1"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:layout_marginStart="24px"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_user"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/et_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_user2"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:layout_marginStart="24px"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_user"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_user1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/home_classify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40px"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/icon_home_like"
+                    android:drawablePadding="12px"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->click.gotoFavoriteSong()}"
+                    android:text="我喜欢的"
+                    android:textColor="#000000"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/icon_home_like"
+                    android:drawablePadding="12px"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->click.gotoFavoriteSongList()}"
+                    android:text="我的歌单"
+                    android:textColor="#000000"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/icon_home_like"
+                    android:drawablePadding="12px"
+                    android:gravity="center_horizontal"
+                    android:text="最近播放"
+                    android:textColor="#000000"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/icon_home_like"
+                    android:drawablePadding="12px"
+                    android:gravity="center_horizontal"
+                    android:text="音乐电台"
+                    android:textColor="#000000"
+                    android:textSize="24px" />
+            </LinearLayout>
+
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="536px"
+                android:layout_height="302px"
+                android:scrollIndicators="bottom"
+                app:banner_auto_loop="true"
+                app:banner_indicator_normal_color="#ffffff"
+                app:banner_indicator_normal_width="8px"
+                app:banner_indicator_selected_color="#1170FF"
+                app:banner_indicator_selected_width="12px"
+                app:banner_radius="20px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_classify" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout_song_list"
+                tabSelectedListener="@{tabSelectedListener}"
+                android:layout_width="wrap_content"
+                android:layout_height="48px"
+                android:layout_marginTop="30px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/banner"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorFullWidth="true"
+                app:tabMinWidth="10px"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="15px"
+                app:tabSelectedTextColor="@color/orange"
+                app:tabTextAppearance="@style/TabLayoutTextStyle"
+                app:tabTextColor="@color/light_gray">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="国风" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="韩语" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="轻音乐" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="派对" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="摇滚" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <ImageView
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="30px"
+                android:onClick="@{()->click.gotoAllSongListCategory()}"
+                android:src="@mipmap/icon_songlist_category_more"
+                app:layout_constraintLeft_toRightOf="@+id/tab_layout_song_list"
+                app:layout_constraintTop_toBottomOf="@+id/banner" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/songListRv"
+                adapter="@{songListCategoryAdapter}"
+                orientation="@{0}"
+                spanCount="@{1}"
+                submitList="@{vm.categorySongList}"
+                android:layout_width="match_parent"
+                android:layout_height="200px"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layout_song_list"
+                tools:listitem="@layout/adapter_search_song_item" />
+
+            <RelativeLayout
+                android:id="@+id/hotSongMore"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                app:layout_constraintTop_toBottomOf="@+id/songListRv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32px"
+                    android:text="热门推荐"
+                    android:textSize="32px" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hotSongRv"
+                adapter="@{hotSongAdapter}"
+                orientation="@{0}"
+                spanCount="@{3}"
+                submitList="@{vm.recSongHomePage}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                app:layoutManager="com.kunminx.binding_recyclerview.layout_manager.WrapContentLinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/hotSongMore"
+                tools:listitem="@layout/adapter_search_song_item" />
+
+
+            <RelativeLayout
+                android:id="@+id/topListMore"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                app:layout_constraintTop_toBottomOf="@+id/hotSongRv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32px"
+                    android:text="排行榜"
+                    android:textSize="32px" />
+
+                <TextView
+                    android:layout_width="116px"
+                    android:layout_height="36px"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="40px"
+                    android:background="@drawable/bg_radius_gray_80"
+                    android:gravity="center"
+                    android:onClick="@{()->click.gotoTopListDetail()}"
+                    android:text="更多"
+                    android:textSize="24px" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topListRv"
+                adapter="@{topListAdapter}"
+                orientation="@{1}"
+                spanCount="@{1}"
+                submitList="@{vm.topList}"
+                android:layout_width="match_parent"
+                android:layout_height="760px"
+                android:clipToPadding="false"
+                app:layoutManager="com.kunminx.binding_recyclerview.layout_manager.WrapContentLinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/topListMore"
+                tools:listitem="@layout/adapter_search_song_item" />
+
+            <RelativeLayout
+                android:id="@+id/singerListMore"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                app:layout_constraintTop_toBottomOf="@+id/topListRv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32px"
+                    android:text="热门歌手"
+                    android:textSize="32px" />
+
+                <TextView
+                    android:layout_width="116px"
+                    android:layout_height="36px"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="40px"
+                    android:background="@drawable/bg_radius_gray_80"
+                    android:gravity="center"
+                    android:onClick="@{()->click.gotoSingerListDetail()}"
+                    android:text="更多"
+                    android:textSize="24px" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/singerListRv"
+                adapter="@{singerListAdapter}"
+                orientation="@{0}"
+                spanCount="@{1}"
+                submitList="@{vm.singerList}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/singerListMore"
+                tools:listitem="@layout/adapter_search_song_item" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{vm.isLogin?View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <Button
+                    android:id="@+id/getBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{()->click.bindAccount()}"
+                    android:text="1.绑定" />
+
+                <Button
+                    android:id="@+id/getQrCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2.扫码" />
+
+                <Button
+                    android:id="@+id/tips"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3.输入" />
+
+                <ImageView
+                    android:id="@+id/qrCodeImg"
+                    bitmap="@{vm.bitMap}"
+                    android:layout_width="0dp"
+                    android:layout_height="100px"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

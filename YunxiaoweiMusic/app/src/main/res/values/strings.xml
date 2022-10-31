@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">YunxiaoweiMusic</string>
+    <string name="song_list_collect">收藏</string>
+    <string name="song_list_collected">已收藏</string>
+    <string name="custom_header_hint_normal">Drop update</string>
+    <string name="custom_header_hint_release">Release update</string>
+    <string name="custom_refreshing">Refreshing…</string>
+    <string name="custom_refresh_done">Update done</string>
+    <string name="song">歌曲</string>
+</resources>

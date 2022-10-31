@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="com.yt.yunxiaoweimusic.ui.page.PlayerFragment.ClickProxy" />
+
+        <variable
+            name="vm"
+            type="com.yt.yunxiaoweimusic.ui.page.PlayerFragment.PlayerStates" />
+
+        <variable
+            name="listener"
+            type="com.yt.yunxiaoweimusic.ui.page.PlayerFragment.ListenerHandler" />
+
+        <variable
+            name="panelVm"
+            type="com.yt.yunxiaoweimusic.ui.view.PlayerSlideListener.SlideAnimatorStates" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/topContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/album_art"
+            category="@{panelVm.albumArtSize.first == panelVm.albumArtSize.second?`circle`:null}"
+            crop="@{panelVm.albumArtSize.first != panelVm.albumArtSize.second}"
+            size="@{panelVm.albumArtSize}"
+            url="@{vm.coverImg}"
+            android:layout_width="@dimen/sliding_up_header"
+            android:layout_height="@dimen/sliding_up_header"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_album_default" />
+
+
+        <LinearLayout
+            android:id="@+id/summary"
+            transX="@{panelVm.summaryTranslationX}"
+            y="@{panelVm.summaryTranslationY}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sliding_up_header"
+            android:layout_gravity="top"
+            android:orientation="vertical"
+            app:layout_anchor="@+id/icon_container"
+            app:layout_anchorGravity="center">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="42dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{vm.title}"
+                android:textColor="@color/white"
+                android:textSize="@{panelVm.songTxtSize}" />
+
+            <TextView
+                android:id="@+id/artist"
+                y="@{panelVm.summaryContentPadding}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:ellipsize="end"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:text="@{vm.artist}"
+                android:textColor="@color/white"
+                android:textSize="@{panelVm.singTxtSize}" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/icon_container"
+            y="@{panelVm.iconContainerY}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginTop="10dp">
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/next"
+                x="@{panelVm.nextX}"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->click.next()}"
+                android:scaleType="center"
+                app:materialIcon="skip_next"
+                app:materialIconColor="@android:color/white"
+                app:materialIconSize="28dp" />
+
+            <com.yt.yunxiaoweimusic.ui.view.PlayPauseView
+                android:id="@+id/play_pause"
+                x="@{panelVm.playPauseX}"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="16dp"
+                android:layout_toStartOf="@id/next"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{()->click.togglePlay()}" />
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/previous"
+                alpha="@{panelVm.previousAlpha}"
+                visible="@{panelVm.previousVisibility}"
+                x="@{panelVm.previousX}"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="16dp"
+                android:layout_toStartOf="@+id/play_pause"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->click.playPrevious()}"
+                android:scaleType="center"
+                app:materialIcon="skip_previous"
+                app:materialIconColor="@android:color/white"
+                app:materialIconSize="28dp" />
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/mode"
+                alpha="@{panelVm.modeAlpha}"
+                visible="@{panelVm.modeVisibility}"
+                x="@{panelVm.modeX}"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="16dp"
+                android:layout_toStartOf="@id/previous"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="center"
+                app:materialIconColor="@android:color/white"
+                app:materialIconSize="28dp" />
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/ic_play_list"
+                x="@{panelVm.icPlayListX}"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/next"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->click.showPlayList()}"
+                android:scaleType="center"
+                app:materialIcon="playlist_play"
+                app:materialIconColor="@android:color/white"
+                app:materialIconSize="28dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="472px"
+            android:layout_height="900px"
+            android:layout_gravity="center">
+
+            <me.wcy.lrcview.LrcView
+                android:id="@+id/lrcview"
+                visible="@{panelVm.lyricVisibility}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:lrcCurrentTextColor="@color/orange"
+                app:lrcNormalTextSize="28px"
+                app:lrcTextGravity="left"
+                app:lrcTextSize="32px" />
+        </RelativeLayout>
+
+        <SeekBar
+            android:id="@+id/seek_bottom"
+            android:layout_width="472px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="200px"
+            android:clickable="true"
+            android:focusable="true"
+            android:max="@{vm.maxSeekDuration}"
+            android:minHeight="6dp"
+            android:progress="@{vm.currentSeekPosition}"
+            android:progressDrawable="@drawable/progressbar_color"
+            android:thumb="@null"
+            app:onSeekBarChangeListener="@{listener}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="64px"
+            android:layout_marginBottom="160px"
+            android:text="@{vm.currentSeekPositionStr}"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="64px"
+            android:layout_marginBottom="160px"
+            android:text="@{vm.maxSeekDurationStr}"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

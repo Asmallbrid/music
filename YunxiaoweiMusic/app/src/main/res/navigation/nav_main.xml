@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2018-present KunMinX
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_favoriteSongFragment"
+            app:destination="@id/favoriteSongFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_favoriteSongListFragment"
+            app:destination="@id/favoriteSongListFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_songListFragment"
+            app:destination="@id/songListFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_topListAllFragment"
+            app:destination="@id/topListAllFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_singerListFragment"
+            app:destination="@id/singerListFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_singerDetailFragment"
+            app:destination="@id/singerDetailFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_allSongListCategoryFragment"
+            app:destination="@id/allSongListCategoryFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_topListDetailFragment"
+            app:destination="@id/topListDetailFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_searchFragment_to_songListFragment"
+            app:destination="@id/songListFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/songListFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.SongListFragment"
+        android:label="fragment_songList"
+        tools:layout="@layout/fragment_songlist" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/favoriteSongFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.FavoriteSongFragment"
+        android:label="favoriteSongFragment" />
+
+    <fragment
+        android:id="@+id/favoriteSongListFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.FavoriteSongListFragment"
+        android:label="favoriteSongListFragment">
+        <action
+            android:id="@+id/action_favoriteSongListFragment_to_songListFragment"
+            app:destination="@id/songListFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/singerListFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.SingerListFragment"
+        android:label="singerListFragment">
+        <action
+            android:id="@+id/action_singerListFragment_to_singerDetailFragment"
+            app:destination="@id/singerDetailFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topListAllFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.TopListAllFragment"
+        android:label="topListAllFragment">
+        <action
+            android:id="@+id/action_topListAllFragment_to_topListDetailFragment"
+            app:destination="@id/topListDetailFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/singerDetailFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.SingerDetailFragment"
+        android:label="singerDetailFragment"></fragment>
+
+    <fragment
+        android:id="@+id/allSongListCategoryFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.AllSongListCategoryFragment"
+        android:label="allSongListCategoryFragment">
+        <action
+            android:id="@+id/action_allSongListCategoryFragment_to_allSongListByCategoryFragment"
+            app:destination="@id/allSongListByCategoryFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/allSongListByCategoryFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.AllSongListByCategoryFragment"
+        android:label="allSongListByCategoryFragment">
+        <action
+            android:id="@+id/action_allSongListByCategoryFragment_to_songListFragment"
+            app:destination="@id/songListFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topListDetailFragment"
+        android:name="com.yt.yunxiaoweimusic.ui.page.TopListDetailFragment"
+        android:label="topListDetailFragment"></fragment>
+
+</navigation>
